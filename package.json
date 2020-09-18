@@ -4,7 +4,10 @@
   "description": "Add a Fullscreen rotating 3D cube website",
   "author": "akshay9",
   "license": "MIT",
-  "repository": "akshay9/react-3d-cube-transition",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshay9/react-3d-cube-transition.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
@@ -50,7 +53,22 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "react-jss": "^10.4.0"
-  }
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/akshay9/react-3d-cube-transition/issues"
+  },
+  "homepage": "https://github.com/akshay9/react-3d-cube-transition#readme",
+  "directories": {
+    "example": "example"
+  },
+  "keywords": [
+    "react",
+    "3d",
+    "transition",
+    "css3",
+    "animation",
+    "plugin",
+    "react-component",
+    "ui"
+  ]
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-// import {createUseStyles} from 'react-jss'
 import styles from './styles.module.css'
 
 const cubeStyles = {

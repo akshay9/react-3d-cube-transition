@@ -37,8 +37,8 @@ class App extends React.Component {
 
   _buttons () {
     return (<div style={{height:"100%", width:"100%"}}>
-      <div onClick={this.onPrevious} style={{position: "absolute", left: 0}}>Previous</div>
-      <div onClick={this.onNext} style={{position: "absolute", right: 0}}>Next</div>
+      <div onClick={this.onPrevious} style={{position: "absolute", left: 0}}>Left Side</div>
+      <div onClick={this.onNext} style={{position: "absolute", right: 0}}>Top Side</div>
     </div>
     )
   } 

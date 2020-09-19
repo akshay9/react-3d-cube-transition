@@ -1,7 +1,7 @@
 {
   "name": "react-3d-cube-transition",
-  "version": "1.0.0",
-  "description": "Add a Fullscreen rotating 3D cube website",
+  "version": "1.0.2",
+  "description": "A easy to use React component to create a Fullpage 3-Dimensional rotating cube website.",
   "author": "akshay9",
   "license": "MIT",
   "repository": {

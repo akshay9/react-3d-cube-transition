@@ -127,10 +127,35 @@ export class CubeTransition extends React.PureComponent {
   }
 
   _renderContent() {
+    let resizeCube = ["back", "front", "top", "bottom"].includes(this.state.currentFace) ?
+                        {width: "100vh", transform: "rotateY({{deg}}) translateZ({{translateZ}})", transition: "width 0.5s" } : false
+
     return  ["back", "front", "left", "right", "top", "bottom"].map((side) => {
+      let deg;
+      let translateZ;
+      if(side == "left") {
+        deg = "-90deg"
+        translateZ = "50vh"
+      } else if (side == "right") {
+        deg = "90deg"
+        translateZ = "calc(100vw - 50vh)"
+      }
+
+      let sideFaceStyle;
+      if(resizeCube && ["left", "right"].includes(side)) {
+        sideFaceStyle = {...resizeCube};
+        sideFaceStyle.transform = resizeCube.transform
+                                    .replace("{{deg}}", deg)
+                                    .replace("{{translateZ}}", translateZ)
+      } else {
+        sideFaceStyle = {}
+      }
+      
+      
       let contentStyles = {
         ...cubeStyles.cubeFace, 
-        ...cubeStyles["cube__face--" + side](this.props.contentElevation + 50)
+        ...cubeStyles["cube__face--" + side](this.props.contentElevation + 50),
+        ...{sideFaceStyle}
       }
 
       return (

@@ -10,7 +10,7 @@ npm start
 ```
 The demo should launch in your browser at location `http://localhost:3000`
 
-[<img width="480" alt="react-3d-cube-transition demo" src="https://github.com/akshay9/react-3d-cube-transition/blob/master/example/src/library-demo.gif?raw=true">](https://akshay-naik.com/react-3d-cube-transition)
+[<img width="480" alt="react-3d-cube-transition demo" src="https://github.com/akshay9/react-3d-cube-transition/blob/master/example/public/library-demo.gif?raw=true">](https://akshay-naik.com/react-3d-cube-transition)
 
 ## License
 

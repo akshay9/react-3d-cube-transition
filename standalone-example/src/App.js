@@ -2,53 +2,57 @@ import React from 'react'
 
 import { CubeTransition } from 'react-3d-cube-transition'
 import 'react-3d-cube-transition/dist/index.css'
+import About from './Pages/About';
+import Contact from './Pages/Contact';
+import Features from './Pages/Features';
+import Gallery from './Pages/Gallery';
+
+import Home from './Pages/Home';
+import Intro from './Pages/Intro';
 
 class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {currentFace: "front"} 
+    this.state = {currentFace: "left"} 
 
-    this.onNext = this.onNext.bind(this)
-    this.onPrevious = this.onPrevious.bind(this)
+    this._handleButtonClick = this._handleButtonClick.bind(this)
   }
   
   render () {
     return (
-      <CubeTransition 
-        face={this.state.currentFace}
-        frontCSS={{background: "#000"}}
-        rightCSS={{background: "#b43b6c"}}
-        leftCSS={{background: "#5519c4"}}
-        backCSS={{background: "#36d40e"}}
-        topCSS={{background: "#14cccc"}}
-        bottomCSS={{background: "#ad1616"}}
-        frontPage={this._buttons()}
-        leftPage={this._buttons()}
-        rightPage={this._buttons()}
-        backPage={this._buttons()}
-        topPage={this._buttons()}
-        bottomPage={this._buttons()}
-        contentElevation={15}
-        button={this._buttons()}
-      />
+      <>
+        <CubeTransition 
+          className="cube-container"
+          face={this.state.currentFace}
+          frontCSS={{background: "#9d848f"}}
+          rightCSS={{background: "#aa9583"}}
+          leftCSS={{background: "#aa9583"}}
+          backCSS={{background: "#aa9583"}}
+          topCSS={{background: "#aa9583"}}
+          bottomCSS={{background: "#aa9583"}}
+          frontPage={(<Home />)}
+          leftPage={<Intro />}
+          rightPage={<Features />}
+          backPage={<About />}
+          topPage={<Gallery />}
+          bottomPage={<Contact />}
+          contentElevation={0}
+        />
+        <div style={{position: "absolute", bottom: "5vh", width:"100vw", transform: "translateX(20%)"}}>
+          <button style={{margin: 10}} onClick={() => (this._handleButtonClick("front"))}>Home</button>
+          <button style={{margin: 10}} onClick={() => (this._handleButtonClick("left"))}>Bio</button>
+          <button style={{margin: 10}} onClick={() => (this._handleButtonClick("right"))}>Features</button>
+          <button style={{margin: 10}} onClick={() => (this._handleButtonClick("back"))}>About</button>
+          <button style={{margin: 10}} onClick={() => (this._handleButtonClick("top"))}>Gallery</button>
+          <button style={{margin: 10}} onClick={() => (this._handleButtonClick("bottom"))}>Contact</button>
+        </div>
+      </>
     )
   }
 
-  _buttons () {
-    return (<div style={{height:"100%", width:"100%"}}>
-      <div onClick={this.onPrevious} style={{position: "absolute", left: 0}}>Left Side</div>
-      <div onClick={this.onNext} style={{position: "absolute", right: 0}}>Top Side</div>
-    </div>
-    )
-  } 
-
-  onPrevious() {
-    this.setState({currentFace: "left"});
-  }
-
-  onNext() {
-    this.setState({currentFace: "top"});
+  _handleButtonClick(face) {
+    this.setState({currentFace: face});
   }
 }
 

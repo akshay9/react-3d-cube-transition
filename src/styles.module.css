@@ -31,7 +31,7 @@ body { font-family: sans-serif; background-color: #d3d3d3; margin:0px; overflow:
   position: relative;
   transform-style: preserve-3d;
   transform: translateZ(-100vh);
-  transition: all 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+  /* transition: all 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s; */
 }
 
 .cube.show-front  { transform: translateZ(-100vh) rotateY(   0deg); }
@@ -64,8 +64,6 @@ body { font-family: sans-serif; background-color: #d3d3d3; margin:0px; overflow:
   height: 100vh;
   /* border: 2px solid black; */
   line-height: 200px;
-  font-size: 40px;
-  font-weight: bold;
   color: white;
   text-align: center;
   /* transition: all 1s 0.5s; */

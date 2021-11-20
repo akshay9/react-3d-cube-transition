@@ -1,72 +1,80 @@
 import React from 'react'
 import styles from './styles.module.css'
 
-const cubeStyles = {
-  scene: {
-    width: '100%',
-    height: '100%',
-    border: '1px solid #CCC',
-    perspective: '1000000px',
-    transform: 'scale(1)'
-  },
-  cube: {
-    width: '100vw',
-    height: '100vh',
-    position: 'relative',
-    transformStyle: 'preserve-3d',
-    transform: 'translateZ(-100vh)',
-    transition: 'all 1s 0.5s'
-  },
-  cubeFace: {
-    width: '100vw',
-    height: '100vh',
-    position: 'absolute',
-    lineHeight: '200px',
-    fontSize: '40px',
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-    transition: 'all 1s 0.5s'
-  },
-  'show-front': { transform: 'translateZ(-100vh) rotateY(   0deg);' },
-  'show-right': { transform: 'translateZ(-100vh) rotateY( -90deg);' },
-  'show-back': { transform: 'translateZ(-100vh) rotateY(-180deg);' },
-  'show-left': { transform: 'translateZ(-100vh) rotateY(  90deg);' },
-  'show-top': { transform: 'translateZ(-100vh) rotateX( -90deg);' },
-  'show-bottom': { transform: 'translateZ(-100vh) rotateX(  90deg);' },
-  'cube__face--front': (disp = 50) => {
-    return { transform: 'rotateY(  0deg) translateZ(' + disp + 'vh)' }
-  },
-  'cube__face--right': (disp = 50) => {
-    return { transform: 'rotateY( 90deg) translateZ(' + disp + 'vw)' }
-  },
-  'cube__face--back': (disp = 50) => {
-    return { transform: 'rotateY(180deg) translateZ(' + disp + 'vh)' }
-  },
-  'cube__face--left': (disp = 50) => {
-    return { transform: 'rotateY(-90deg) translateZ(' + disp + 'vw)' }
-  },
-  'cube__face--top': (disp = 50) => {
-    return { transform: 'rotateX( 90deg) translateZ(' + disp + 'vh)' }
-  },
-  'cube__face--bottom': (disp = 50) => {
-    return { transform: 'rotateX(270deg) translateZ(' + disp + 'vh)' }
+const cubeStylesGenerator = (animationDuration) => {
+  return {
+    scene: {
+      width: '100%',
+      height: '100%',
+      border: '1px solid #CCC',
+      perspective: '1000000px',
+      transform: 'scale(1)'
+    },
+    cube: {
+      // width: '100vw',
+      // height: '100vh',
+      // position: 'relative',
+      // transformStyle: 'preserve-3d',
+      // transform: 'translateZ(-100vh)',
+      transition:
+        'all cubic-bezier(0.34, 1.56, 0.64, 1) ' +
+        animationDuration / 1000 +
+        's ' +
+        animationDuration / 2000 +
+        's'
+    },
+    cubeFace: {
+      width: '100vw',
+      height: '100vh',
+      position: 'absolute',
+      transition:
+        'all ' +
+        animationDuration / 1000 +
+        's ' +
+        animationDuration / 2000 +
+        's'
+    },
+    'show-front': { transform: 'translateZ(-100vh) rotateY(   0deg);' },
+    'show-right': { transform: 'translateZ(-100vh) rotateY( -90deg);' },
+    'show-back': { transform: 'translateZ(-100vh) rotateY(-180deg);' },
+    'show-left': { transform: 'translateZ(-100vh) rotateY(  90deg);' },
+    'show-top': { transform: 'translateZ(-100vh) rotateX( -90deg);' },
+    'show-bottom': { transform: 'translateZ(-100vh) rotateX(  90deg);' },
+    'cube__face--front': (disp = 50) => {
+      return { transform: 'rotateY(  0deg) translateZ(' + disp + 'vh)' }
+    },
+    'cube__face--right': (disp = 50) => {
+      return { transform: 'rotateY( 90deg) translateZ(' + disp + 'vw)' }
+    },
+    'cube__face--back': (disp = 50) => {
+      return { transform: 'rotateY(180deg) translateZ(' + disp + 'vh)' }
+    },
+    'cube__face--left': (disp = 50) => {
+      return { transform: 'rotateY(-90deg) translateZ(' + disp + 'vw)' }
+    },
+    'cube__face--top': (disp = 50) => {
+      return { transform: 'rotateX( 90deg) translateZ(' + disp + 'vh)' }
+    },
+    'cube__face--bottom': (disp = 50) => {
+      return { transform: 'rotateX(270deg) translateZ(' + disp + 'vh)' }
+    }
   }
 }
 
 const zoomOutAnimation = [
   { transform: 'scale(1)', perspective: 1000000 },
   { transform: 'scale(0.60)', perspective: 5000 },
-  { transform: 'scale(0.60)', perspective: 5000 },
+  { transform: 'scale(0.70)', perspective: 5000 },
   { transform: 'scale(1)', perspective: 1000000 }
 ]
 
 export class CubeTransition extends React.PureComponent {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
-      currentFace: 'front'
+      currentFace: 'front',
+      animationDuration: props.animationSpeed || 1000
     }
 
     this.sceneRef = React.createRef()
@@ -76,7 +84,10 @@ export class CubeTransition extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    this.sceneRef.current.animate(zoomOutAnimation, 2000)
+    this.sceneRef.current.animate(
+      zoomOutAnimation,
+      this.state.animationDuration * 1.9
+    )
     this.sceneRef.current.style.animationTimingFunction =
       'cubic-bezier(0.68, -0.6, 0.32, 1.6)'
   }
@@ -86,12 +97,21 @@ export class CubeTransition extends React.PureComponent {
     if (nextProps.face !== this.state.currentFace) {
       this.setState({ currentFace: nextProps.face })
     }
+
+    if (nextProps.animationDuration !== this.state.animationSpeed) {
+      this.setState({ animationDuration: nextProps.animationDuration })
+    }
   }
 
   render() {
+    const cubeStyles = cubeStylesGenerator(this.state.animationDuration)
     return (
-      <div ref={this.sceneRef} className={[styles.scene, ''].join(' ')}>
+      <div
+        ref={this.sceneRef}
+        className={[styles.scene, '', this.props.className].join(' ')}
+      >
         <div /* style={{...cubeStyles.cube, ...cubeStyles["show-"+this.state.currentFace]}} */
+          style={{ ...cubeStyles.cube }}
           className={[
             styles.cube,
             styles['show-' + this.state.currentFace]
@@ -105,23 +125,24 @@ export class CubeTransition extends React.PureComponent {
   }
 
   _renderChildren() {
+    const cubeStyles = cubeStylesGenerator(this.state.animationDuration)
     const resizeCube = ['back', 'front', 'top', 'bottom'].includes(
       this.state.currentFace
     )
       ? {
           width: '100vh',
           transform: 'rotateY({{deg}}) translateZ({{translateZ}})',
-          transition: 'width 0.5s'
+          transition: 'width ' + this.state.animationDuration / 1000 + 's'
         }
       : false
     return ['back', 'front', 'left', 'right', 'top', 'bottom'].map(
       (side, index) => {
         let deg
         let translateZ
-        if (side == 'left') {
+        if (side === 'left') {
           deg = '-90deg'
           translateZ = '50vh'
-        } else if (side == 'right') {
+        } else if (side === 'right') {
           deg = '90deg'
           translateZ = 'calc(100vw - 50vh)'
         }
@@ -149,13 +170,14 @@ export class CubeTransition extends React.PureComponent {
   }
 
   _renderContent() {
+    const cubeStyles = cubeStylesGenerator(this.state.animationDuration)
     const resizeCube = ['back', 'front', 'top', 'bottom'].includes(
       this.state.currentFace
     )
       ? {
           width: '100vh',
           transform: 'rotateY({{deg}}) translateZ({{translateZ}})',
-          transition: 'width 0.5s'
+          transition: 'width ' + this.state.animationDuration / 1000 + 's'
         }
       : false
 

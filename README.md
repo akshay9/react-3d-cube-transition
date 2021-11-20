@@ -43,7 +43,9 @@ class Example extends Component {
 }
 ```
 
-Checkout working demo - [Standalone Example folder](https://github.com/akshay9/react-3d-cube-transition/tree/master/standalone-example)
+Checkout working example - [Standalone Example folder](https://github.com/akshay9/react-3d-cube-transition/tree/master/standalone-example)
+
+Live Demo: [Demo](https://akshay9.github.io/react-3d-cube-transition/)
 
 ### Demo
 
@@ -55,6 +57,7 @@ Checkout working demo - [Standalone Example folder](https://github.com/akshay9/r
 | className                 |  `string`  |        `null`         | Add a className to the component container                                                                            |
 | face                      |  `string`  |        `front`        | Sets the current cube side. Possible values: `front, top, left, right, top, bottom`                                   |
 | contentElevation          |  `number`  |          `0`          | Set the elevation of content for each side with respect to its background                                             |
+| animationDuration          |  `number`  |          `1000`          | Animation  Duration in ms (Note: Actual duration of the animation would be `animationDuration*1.5 ms` )                                 |
 | frontPage                 |   `node`   |        `null`         | Renders content on the front side of the cube                                                                         |
 | backPage                  |   `node`   |        `null`         | Renders content on the back side of the cube                                                                          |
 | leftPage                  |   `node`   |        `null`         | Renders content on the left side of the cube                                                                          |

@@ -30,6 +30,7 @@ class App extends React.Component {
         topPage={this._buttons()}
         bottomPage={this._buttons()}
         contentElevation={15}
+        animationDuration={5000}
         button={this._buttons()}
       />
     )
@@ -37,8 +38,8 @@ class App extends React.Component {
 
   _buttons () {
     return (<div style={{height:"100%", width:"100%"}}>
-      <div onClick={this.onPrevious} style={{position: "absolute", left: 0}}>Left Side</div>
-      <div onClick={this.onNext} style={{position: "absolute", right: 0}}>Top Side</div>
+      <div onClick={this.onPrevious} style={{position: "absolute", left: 0, color:"#fff", fontSize:40}}>Left Side</div>
+      <div onClick={this.onNext} style={{position: "absolute", right: 0, color:"#fff", fontSize:40}}>Top Side</div>
     </div>
     )
   } 

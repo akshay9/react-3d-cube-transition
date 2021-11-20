@@ -43,7 +43,7 @@ class Example extends Component {
 }
 ```
 
-Checkout working demo - [Example folder](https://github.com/akshay9/react-3d-cube-transition/tree/master/example)
+Checkout working demo - [Standalone Example folder](https://github.com/akshay9/react-3d-cube-transition/tree/master/standalone-example)
 
 ### Demo
 
